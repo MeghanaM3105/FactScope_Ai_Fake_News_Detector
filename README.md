@@ -235,15 +235,32 @@ Confidence %
 Explanation
 
 🧪 Testing Examples
-Real News (Expected: GREEN)
-“According to the Federal Reserve, interest rates remain unchanged…”
 
-“Researchers at Stanford published findings in Nature Medicine…”
+Real News (Expected: GREEN)
+
+1. "According to the Federal Reserve, interest rates remain unchanged…"
+
+2. "The House Oversight Committee announced hearings scheduled for next week regarding government spending. Representative James Comer state the   committee will review federal budget allocations."
+
+3. "The Federal Reserve raised interest rates by 25 basis points, marking the 11th increase since March 2022. Chair Jerome Powell indicated future decisions will depend on economic data."
+
+4. "The Department of Justice filed an antitrust lawsuit against Google, alleging monopolization of digital advertising markets. Attorney General Merrick Garland announced the action."
+
+5. "Google DeepMind's AlphaFold predicted structures for over 200 million proteins, covering virtually all known organisms. The database is freely available to researchers."
+
 
 Fake News (Expected: RED)
-“SHOCKING DISCOVERY! Government hiding the truth!”
 
-“MAKE $10,000 IN 24 HOURS! Banks hate this trick!”
+1. "SHOCKING: YOU WON'T BELIEVE WHAT THE GOVERNMENT FOUND IN AREA 51! Secret documents leaked by whistleblower reveal ALIEN TECHNOLOGY being reverse-engineered for 50 years! They're hiding the truth about extraterrestrial life! WAKE UP AMERICA! Share before this gets deleted!"
+
+2. "BREAKING: ELECTION FRAUD PROVEN - MILLIONS OF FAKE VOTES FOUND! Warehouse in Detroit contains 500,000 ballots marked for one candidate! Security footage shows operatives dropping off boxes at 3 AM! This changes EVERYTHING! MUST SEE!"
+
+3. "BILL GATES DEPOPULATION AGENDA REVEALED! Patent for vaccine that reduces fertility! Funding population control in Africa! Interview clip from 2010 surfaces: 'world needs 1 billion less people'! GENOCIDE PLANNED!"
+
+4. "HAIR GROWTH SECRET REVEALED - CELEBRITIES USING IT! Former hair loss sufferer discovers $9 remedy! Thicker hair in 30 days guaranteed! Works for men and women! Clinical study shows 90% success rate! Limited stock!"
+
+5. "PSYCHIC SOLVES MURDER CASES - FBI CONFIRMS! Remote viewer used by government for 20 years! Now offering personal readings! Predict your future! Find lost loved ones! 95% accuracy! First 100 callers FREE!"
+
 
 📊 Performance Metrics
 Metric	Value
@@ -274,4 +291,5 @@ LinkedIn: https://www.linkedin.com/in/meghana-macharla-29b136301/
 
 📜 License
 This project is licensed under the MIT License.
+
 
