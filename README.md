@@ -1,3 +1,8 @@
+<img width="1881" height="903" alt="Share_news" src="https://github.com/user-attachments/assets/1c08c447-f11c-48d7-95ca-a9aab460a9f1" />
+<img width="1885" height="905" alt="Home_Page_Light_Theme" src="https://github.com/user-attachments/assets/aa7b1254-5c3d-4518-8b20-97b631946838" />
+<img width="1872" height="877" alt="Home_Page_Dark_Theme" src="https://github.com/user-attachments/assets/cd3bb678-e732-4026-b76e-64ee22268661" />
+<img width="1864" height="894" alt="Detection_real_news" src="https://github.com/user-attachments/assets/da47b4e0-0a72-4b89-8d6c-8ef2bea3f0ed" />
+<img width="1886" height="905" alt="Detection_fake_news" src="https://github.com/user-attachments/assets/76966558-c2a4-48f1-b3d9-e760243e8389" />
 
 
 # 🔎 FactScope – AI-Powered Fake News Detection System
@@ -261,19 +266,6 @@ Fake News (Expected: RED)
 
 5. "PSYCHIC SOLVES MURDER CASES - FBI CONFIRMS! Remote viewer used by government for 20 years! Now offering personal readings! Predict your future! Find lost loved ones! 95% accuracy! First 100 callers FREE!"
 
-Project Screenshots :
-
-![Home Page of Fake News Detection System(Light Theme](assests/Home_Page_Light_Theme.png)
-
-![Home Page of Fake News Detection System(Dark Theme](assests/Home_Page_Dark_Theme.png)
-
-![News Input and Prediction Interface](assests/Detection_real_news.png)
-
-![News Input and Prediction Interface](assests/Detection_fake_news.png)
-
-![Sharing Predicted News](assests/Share_news.png)
-
-
 📊 Performance Metrics
 Metric	Value
 Accuracy	92.5%
@@ -303,6 +295,7 @@ LinkedIn: https://www.linkedin.com/in/meghana-macharla-29b136301/
 
 📜 License
 This project is licensed under the MIT License.
+
 
 
 
