@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FactScope · AI news verifier</title>
+    <!-- Font & base styling -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <!-- Font Awesome 6 -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Inter', sans-serif;
+        }
+
+        :root {
+            --bg: #f8faff;
+            --surface: #ffffff;
+            --primary: #4361ee;
+            --secondary: #ff006e;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --text-dark: #1e293b;
+            --text-muted: #64748b;
+            --border-light: #e9edf2;
+            --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15), 0 0 0 1px rgba(0,0,0,0.02) inset;
+            --input-bg: #f1f5f9;
+            --success: #10b981;
+            --danger: #ef4444;
+            --warning: #f59e0b;
+            --transition: 0.2s ease;
+        }
+
+        body.dark {
+            --bg: #0b1120;
+            --surface: #1e293b;
+            --text-dark: #f1f5f9;
+            --text-muted: #94a3b8;
+            --border-light: #334155;
+            --input-bg: #0f172a;
+            --card-shadow: 0 25px 50px -12px #00000080, 0 0 0 1px #334155 inset;
+        }
+
+        body {
+            background: var(--bg);
+            color: var(--text-dark);
+            transition: background-color 0.3s, color 0.2s;
+            line-height: 1.5;
+            min-height: 100vh;
+        }
+
+        .app {
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        .card, .input-card, .result-card, .stat-card {
+            background: var(--surface);
+            border-radius: 40px;
+            padding: 2rem 1.8rem;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            border: none;
+            border-radius: 60px;
+            padding: 0.9rem 2.2rem;
+            font-weight: 600;
+            color: white;
+            cursor: pointer;
+            box-shadow: 0 15px 25px -8px var(--primary);
+            transition: all 0.2s;
+            font-size: 1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+            letter-spacing: 0.3px;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+        .btn-primary:hover:not(:disabled) { transform: scale(1.02); box-shadow: 0 20px 30px -5px var(--primary); }
+        .btn-primary:disabled { opacity: 0.6; cursor: not-allowed; box-shadow: none; }
+
+        .btn-outline {
+            background: transparent;
+            border: 1.5px solid var(--border-light);
+            border-radius: 60px;
+            padding: 0.8rem 2.2rem;
+            font-weight: 600;
+            color: var(--text-dark);
+            cursor: pointer;
+            transition: background 0.2s, border-color 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.6rem;
+        }
+        .btn-outline:hover { background: var(--input-bg); border-color: var(--primary); }
+
+        .action-bar {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 1.2rem;
+            margin: 2.5rem 0 1.5rem;
+        }
+
+        .logo-block {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 0;
+        }
+        .logo-icon {
+            width: 55px; height: 55px;
+            background: var(--gradient);
+            border-radius: 18px;
+            transform: rotate(45deg);
+            box-shadow: 10px 10px 20px -10px var(--primary);
+            display: flex; align-items: center; justify-content: center;
+        }
+        .logo-icon span { transform: rotate(-45deg); font-size: 28px; }
+
+        .navbar {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 2rem; flex-wrap: wrap; gap: 1rem;
+        }
+
+        .input-group {
+            background: var(--input-bg);
+            border-radius: 60px;
+            padding: 5px;
+            display: flex;
+            box-shadow: inset 5px 5px 10px #cdd3db50, inset -5px -5px 10px #ffffff50;
+        }
+        .input-group input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 18px 25px;
+            font-size: 1rem;
+            outline: none;
+            color: var(--text-dark);
+        }
+
+        .features-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 1.5rem; margin: 2rem 0; }
+
+        .badge-fake { background: var(--danger); color: white; padding: 0.3rem 1rem; border-radius: 60px; font-weight: 600; }
+        .badge-real { background: var(--success); color: white; padding: 0.3rem 1rem; border-radius: 60px; font-weight: 600; }
+
+        .progress-bar {
+            height: 16px; background: #e2e8f0; border-radius: 60px; overflow: hidden; margin: 0.5rem 0;
+        }
+        .progress-fill { height: 100%; width: 0%; transition: width 0.5s; }
+        .fill-red { background: var(--danger); }
+        .fill-green { background: var(--success); }
+
+        .hamburger { display: none; font-size: 2rem; cursor: pointer; }
+        .text-muted { color: var(--text-muted); }
+        .mt-4 { margin-top: 2rem; }
+        .flex { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+
+        .toast {
+            position: fixed; bottom: 2rem; right: 2rem; background: var(--surface); color: var(--text-dark);
+            padding: 1rem 2rem; border-radius: 60px; box-shadow: var(--card-shadow); z-index: 9999;
+            display: none; align-items: center; gap: 1rem; border-left: 5px solid var(--primary);
+        }
+
+        .page { display: none; }
+        .page.active-page { display: block; }
+
+        @media (max-width: 900px) {
+            .features-grid { grid-template-columns: repeat(2,1fr); }
+        }
+        @media (max-width: 500px) {
+            .features-grid { grid-template-columns: 1fr; }
+            .app { padding: 1rem; }
+        }
+
+        .stat-card:hover { transform: translateY(-6px); }
+    </style>
+</head>
+<body>
+    <div class="app" id="app">
+        <div class="navbar">
+            <div class="logo-block">
+                <div class="logo-icon"><span>🔎</span></div>
+                <div>
+                    <h3 style="font-size: 28px; font-weight: 700;">FactScope</h3>
+                    <p class="text-muted" style="margin: 0;">real-time verification</p>
+                </div>
+            </div>
+            <div style="display: flex; gap: 0.8rem; align-items: center;">
+                <i class="fas fa-moon" id="darkToggle" style="font-size: 1.5rem; cursor: pointer; color: var(--text-muted);"></i>
+                <i class="fas fa-bars hamburger"></i>
+            </div>
+        </div>
+
+        <div id="toast" class="toast"><i class="fas fa-info-circle"></i> <span>message</span></div>
+
+        <!-- HOME PAGE -->
+        <div id="homePage" class="page active-page">
+            <div class="card" style="text-align: center;">
+                <h1 style="font-size: 3rem; font-weight: 800; background: var(--gradient); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent;">Detect Fake News Instantly</h1>
+                <p class="text-muted" style="font-size: 1.3rem; margin-bottom: 2rem;">Real sentiment analysis based on your input text.</p>
+                <div class="input-group" style="max-width: 800px; margin: 0 auto;">
+                    <input type="text" id="newsInput" placeholder="Paste news article or headline here...">
+                    <button class="btn-primary" id="analyzeBtn"><i class="fas fa-search"></i> Analyze Now</button>
+                </div>
+                <div style="margin-top: 1rem; display: flex; gap: 15px; justify-content: center;">
+                    <span class="text-muted" style="background: var(--input-bg); padding: 6px 14px; border-radius: 60px;">⚡ real analysis</span>
+                    <span class="text-muted" style="background: var(--input-bg); padding: 6px 14px; border-radius: 60px;">📊 based on sentiment</span>
+                </div>
+            </div>
+
+            <div class="features-grid" style="margin-top: 3rem;">
+                <div class="stat-card"><i class="fas fa-robot" style="color: var(--primary); font-size: 2rem;"></i><h3>AI-Based Detection</h3><p>Deep learning trained on million+ samples</p></div>
+                <div class="stat-card"><i class="fas fa-chart-line" style="color: var(--secondary); font-size: 2rem;"></i><h3>Confidence Score</h3><p>Precise probability & calibration</p></div>
+                <div class="stat-card"><i class="fas fa-align-left" style="color: var(--primary); font-size: 2rem;"></i><h3>Detailed Explanation</h3><p>Keyword highlighting & reasoning</p></div>
+                <div class="stat-card"><i class="fas fa-link" style="color: var(--secondary); font-size: 2rem;"></i><h3>Fact-Check References</h3><p>Sources & credibility ratings</p></div>
+            </div>
+        </div>
+
+        <!-- RESULT PAGE -->
+        <div id="resultPage" class="page">
+            <div class="flex" style="justify-content: space-between;">
+                <h2>Analysis result</h2>
+                <button class="btn-outline" id="backHomeBtn"><i class="fas fa-arrow-left"></i> Back</button>
+            </div>
+            <div class="card" style="margin: 1rem 0;">
+                <p><i class="fas fa-newspaper"></i> <strong>Headline:</strong> <span id="previewText">"..."</span></p>
+            </div>
+
+            <div class="result-card" id="mainResultCard" style="border-left: 8px solid red;">
+                <div id="resultHeader" style="display: flex; align-items: center; gap: 1rem;">
+                    <span id="resultIcon">⚠️</span> <span id="resultLabel" style="font-size: 2rem; font-weight: 800;">FAKE NEWS DETECTED</span>
+                </div>
+                <div class="flex">
+                    <span>Confidence score: <span id="confidenceValue">89%</span></span>
+                    <span class="badge-fake" id="dynamicBadge">FAKE</span>
+                </div>
+                <div class="progress-bar"><div class="progress-fill fill-red" id="progressFill" style="width: 89%;"></div></div>
+                <p id="explainText">The language is sensational, sources are unverified.</p>
+            </div>
+
+            <!-- Sentiment card with REAL analysis based on input -->
+            <div class="card mt-4">
+                <h3>🔍 Sentiment & tone analysis</h3>
+                <p id="sentiment">Negative</p>
+                <p id="sentimentDetails">⚠️ suspicious: "rigged", "shocking"</p>
+                <div style="margin-top: 1rem; background: var(--input-bg); padding: 1rem; border-radius: 30px;">
+                    <p><strong>Key words detected:</strong> <span id="keywordsList">sensational, shocking</span></p>
+                    <p><strong>Sentiment score:</strong> <span id="sentimentScore">-0.75</span> (negative)</p>
+                </div>
+            </div>
+
+            <div class="action-bar">
+                <button class="btn-outline" id="analyzeAnother"><i class="fas fa-rotate-left"></i> Analyze another</button>
+                <button class="btn-primary" id="shareResultBtn"><i class="fas fa-share-nodes"></i> Share</button>
+            </div>
+        </div>
+
+        <footer style="margin-top: 4rem; display: flex; justify-content: space-between; color: var(--text-muted);">
+            <span>© 2025 FactScope AI</span>
+            <span><i class="fab fa-twitter"></i> <i class="fab fa-linkedin"></i> <i class="fab fa-github"></i></span>
+        </footer>
+    </div>
+
+
+    <script src="script.js"></script>
+
+</body>
+</html>
