@@ -261,6 +261,18 @@ Fake News (Expected: RED)
 
 5. "PSYCHIC SOLVES MURDER CASES - FBI CONFIRMS! Remote viewer used by government for 20 years! Now offering personal readings! Predict your future! Find lost loved ones! 95% accuracy! First 100 callers FREE!"
 
+Project Screenshots :
+
+![Home Page of Fake News Detection System(Light Theme](assests/Home_Page_Light_Theme.png)
+
+![Home Page of Fake News Detection System(Dark Theme](assests/Home_Page_Dark_Theme.png)
+
+![News Input and Prediction Interface](assests/Detection_real_news.png)
+
+![News Input and Prediction Interface](assests/Detection_fake_news.png)
+
+![Sharing Predicted News](assests/Share_news.png)
+
 
 📊 Performance Metrics
 Metric	Value
@@ -291,5 +303,6 @@ LinkedIn: https://www.linkedin.com/in/meghana-macharla-29b136301/
 
 📜 License
 This project is licensed under the MIT License.
+
 
 
